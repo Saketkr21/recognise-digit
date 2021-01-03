@@ -1,0 +1,5 @@
+__pycache__/
+dataset/
+env/
+flask_app.pyc
+model/
