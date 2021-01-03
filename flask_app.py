@@ -2,10 +2,7 @@ import base64
 import re
 
 import cv2
-import keras
-from matplotlib import pyplot as plt
 import numpy as np
-import tensorflow as tf
 from flask import Flask, redirect, render_template, request, url_for
 from keras.models import model_from_json
 
@@ -20,12 +17,8 @@ model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accurac
 def prediction(path):
     x = cv2.imread(path,0)
     x = cv2.resize(x, (28, 28))
-    # plt.imshow(x.reshape(28,28),cmap=plt.cm.binary)
-    # plt.show()
     x = x.reshape(1,28,28,1)
-    # x = np.array(x).astype('float32')
     out = model.predict(x)
-    # print(np.argmax(out, axis=1))
     # convert the response to a string
     response = np.argmax(out, axis=1)
     return str(response[0])
